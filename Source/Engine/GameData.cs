@@ -255,6 +255,7 @@ namespace MapEngine
             Location = new MapPoint();
         }
         public uint ID { get; protected set; }
+        public int InstanceID { get; protected set; }
         public string Name { get; protected set; }
         public MapPoint Location { get; private set; }
         public float Heading { get; protected set; }

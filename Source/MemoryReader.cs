@@ -349,7 +349,7 @@ public class MemoryReader {
             IntPtr current = pinned.AddrOfPinnedObject();
             for(int i = 0; i < Count; i++) {
                output[i] = (T)Marshal.PtrToStructure(current, typeof(T));
-               current = (IntPtr)((int)current + Marshal.SizeOf(output[i])); //advance to the next index
+               current = (IntPtr)((Int64)current + Marshal.SizeOf(output[i])); //advance to the next index
             }
             return output;
 #if DEBUG
