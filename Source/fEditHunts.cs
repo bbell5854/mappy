@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace mappy {
    public partial class fEditHunts : Form {
@@ -58,5 +59,10 @@ namespace mappy {
       private void Hunts_DataChanged() {
          PopulateList();
       }
-   }
+
+        private void chkShowOnlyHunt_CheckedChanged(object sender, EventArgs e)
+        {
+            m_parent.Engine.ShowHuntListOnly = chkShowOnlyHunt.Checked;
+        }
+    }
 }

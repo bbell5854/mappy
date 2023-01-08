@@ -70,6 +70,7 @@ namespace MapEngine
         private bool m_drawClaimLines = true;
         private bool m_drawPetLines = true;
         private bool m_drawHuntLines = true;
+				private bool m_huntListOnly = false;
         private bool m_usePlayerColor = false;
         private bool m_drawHeadings = true;
 
@@ -1141,6 +1142,21 @@ namespace MapEngine
             }
         }
 
+				[Category("Map")]
+        [Description("Show only mobs in Hunt list.")]
+        [DisplayName("Show only Hunt mobs")]
+        [DefaultValue(true)]
+        public bool ShowHuntListOnly
+        {
+            get { return m_huntListOnly; }
+            set
+            {
+                m_huntListOnly = value;
+                if (Updated != null)
+                    Updated();
+            }
+        }
+
         [Category("Map")]
         [DisplayName("Player Color")]
         [Description("Gets or sets the color of player spawns.")]
@@ -1808,6 +1824,12 @@ namespace MapEngine
                         if (Math.Max(playerZ, spawn.Location.Z) - Math.Min(playerZ, spawn.Location.Z) > m_depthCutoff)
                             continue;
                     }
+
+										//if only drawing spawns in hunt list, then skip this spawn if it's not in the hunt list
+										if (m_huntListOnly && !spawn.Hunt) {
+											continue;
+										}
+
                     DrawSpawn(g, spawn);
                 }
                 
